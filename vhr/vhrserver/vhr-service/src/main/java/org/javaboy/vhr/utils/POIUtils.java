@@ -226,12 +226,12 @@ public class POIUtils {
      * @param allJobLevels
      * @return
      */
-    public static List<Employee> excel2Employee(MultipartFile file, List<Nation> allNations, List<Politicsstatus> allPoliticsstatus, List<Department> allDepartments, List<Position> allPositions, List<JobLevel> allJobLevels) {
+    public static List<Employee> excel2Employee(MultipartFile multipartFile, List<Nation> allNations, List<Politicsstatus> allPoliticsstatus, List<Department> allDepartments, List<Position> allPositions, List<JobLevel> allJobLevels) {
         List<Employee> list = new ArrayList<>();
         Employee employee = null;
         try {
             //1. 创建一个 workbook 对象
-            HSSFWorkbook workbook = new HSSFWorkbook(file.getInputStream());
+            HSSFWorkbook workbook = new HSSFWorkbook(multipartFile.getInputStream());
             //2. 获取 workbook 中表单的数量
             int numberOfSheets = workbook.getNumberOfSheets();
             for (int i = 0; i < numberOfSheets; i++) {
@@ -261,62 +261,6 @@ public class POIUtils {
                                     case 1:
                                         employee.setName(cellValue);
                                         break;
-                                    case 2:
-                                        employee.setWorkID(cellValue);
-                                        break;
-                                    case 3:
-                                        employee.setGender(cellValue);
-                                        break;
-                                    case 5:
-                                        employee.setIdCard(cellValue);
-                                        break;
-                                    case 6:
-                                        employee.setWedlock(cellValue);
-                                        break;
-                                    case 7:
-                                        int nationIndex = allNations.indexOf(new Nation(cellValue));
-                                        employee.setNationId(allNations.get(nationIndex).getId());
-                                        break;
-                                    case 8:
-                                        employee.setNativePlace(cellValue);
-                                        break;
-                                    case 9:
-                                        int politicstatusIndex = allPoliticsstatus.indexOf(new Politicsstatus(cellValue));
-                                        employee.setPoliticId(allPoliticsstatus.get(politicstatusIndex).getId());
-                                        break;
-                                    case 10:
-                                        employee.setPhone(cellValue);
-                                        break;
-                                    case 11:
-                                        employee.setAddress(cellValue);
-                                        break;
-                                    case 12:
-                                        int departmentIndex = allDepartments.indexOf(new Department(cellValue));
-                                        employee.setDepartmentId(allDepartments.get(departmentIndex).getId());
-                                        break;
-                                    case 13:
-                                        int jobLevelIndex = allJobLevels.indexOf(new JobLevel(cellValue));
-                                        employee.setJobLevelId(allJobLevels.get(jobLevelIndex).getId());
-                                        break;
-                                    case 14:
-                                        int positionIndex = allPositions.indexOf(new Position(cellValue));
-                                        employee.setPosId(allPositions.get(positionIndex).getId());
-                                        break;
-                                    case 15:
-                                        employee.setEngageForm(cellValue);
-                                        break;
-                                    case 16:
-                                        employee.setTiptopDegree(cellValue);
-                                        break;
-                                    case 17:
-                                        employee.setSpecialty(cellValue);
-                                        break;
-                                    case 18:
-                                        employee.setSchool(cellValue);
-                                        break;
-                                    case 20:
-                                        employee.setWorkState(cellValue);
-                                        break;
                                     case 21:
                                         employee.setEmail(cellValue);
                                         break;
@@ -324,18 +268,6 @@ public class POIUtils {
                                 break;
                             default: {
                                 switch (k) {
-                                    case 4:
-                                        employee.setBirthday(cell.getDateCellValue());
-                                        break;
-                                    case 19:
-                                        employee.setBeginDate(cell.getDateCellValue());
-                                        break;
-                                    case 23:
-                                        employee.setBeginContract(cell.getDateCellValue());
-                                        break;
-                                    case 24:
-                                        employee.setEndContract(cell.getDateCellValue());
-                                        break;
                                     case 22:
                                         employee.setContractTerm(cell.getNumericCellValue());
                                         break;

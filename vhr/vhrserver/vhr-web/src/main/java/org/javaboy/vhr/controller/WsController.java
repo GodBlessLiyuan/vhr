@@ -4,6 +4,7 @@ import org.javaboy.vhr.model.ChatMsg;
 import org.javaboy.vhr.model.Hr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -23,5 +24,10 @@ public class WsController {
         chatMsg.setFromNickname(hr.getName());
         chatMsg.setDate(new Date());
         simpMessagingTemplate.convertAndSendToUser(chatMsg.getTo(), "/queue/chat", chatMsg);
+    }
+    @MessageMapping("/ws/nf")
+    @SendTo("/topic/nf")
+    public String handlerNF(){
+        return "系统消息";
     }
 }
